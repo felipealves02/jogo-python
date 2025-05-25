@@ -213,7 +213,7 @@ class Game:
             # Mensagens de fim
             if self.is_gameover:
                 screen.draw.text("GAME OVER", center=(WIDTH/2, HEIGHT/2), fontsize=60, color=(255, 0, 0))
-                screen.draw.text("Pressione ESPAÇO para recomeçar", center=(WIDTH/2, HEIGHT/2+50), fontsize=30, color=(0, 0, 0))
+                screen.draw.text("Pressione ESPAÇO para recomeçar!", center=(WIDTH/2, HEIGHT/2+50), fontsize=30, color=(0, 0, 0))
             if self.is_victory:
                 screen.draw.text("VITÓRIA!", center=(WIDTH/2, HEIGHT/2), fontsize=60, color=(0, 255, 0))
                 screen.draw.text(f"Completou com {self.deaths} mortes!", center=(WIDTH/2, HEIGHT/2+50), fontsize=30, color=(0, 0, 0))
@@ -236,6 +236,7 @@ def on_key_down(key):
     if game.state == GAME_PLAYING:
         if (game.is_gameover or game.is_victory) and key == keys.SPACE:
             game.is_gameover, game.is_victory = False, False
+            game.death_pause = 0
             game.level, game.deaths, game.missions_completed = 1, 0, 0
             game.initialize_level()
         if key == keys.ESCAPE: game.state = GAME_MENU
